@@ -72,12 +72,17 @@
       width: 90%;
       padding: 10px;
       margin: 5px;
-      background-color: #ffffcc; /* Giallo chiaro */
-      color: #990000; /* Rosso scuro per il testo */
-      border: 2px solid #990000; /* Bordo rosso scuro */
+      background-color: #ffffcc;
+      color: #990000;
+      border: 2px solid #990000;
       font-weight: bold;
       cursor: pointer;
       font-size: 14px;
+    }
+
+    .transparent {
+      opacity: 0.5;
+      pointer-events: none;
     }
 
     .button.completed {
@@ -91,11 +96,6 @@
       background-color: #0f4d07; /* Giallo chiaro */
       color: #c4a912; /* Rosso scuro per il testo */
       border: 2px solid #948715; /* Bordo rosso scuro */
-    }
-
-    #azzardo1:active, #azzardo2:active, #sfida1:active, #sfida2:active {
-      opacity: 0.5;
-      pointer-events: none;
     }
   </style>
 </head>
@@ -203,11 +203,12 @@
     });
 
     for (let i = 1; i <= 2; i++) {
-      document.getElementById(`azzardo${i}`).classList.remove('transparent');
-      document.getElementById(`sfida${i}`).classList.remove('transparent');
-
-      document.getElementById(`azzardo${i}`).disabled = false;
-      document.getElementById(`sfida${i}`).disabled = false;
+      let azzardoButton = document.getElementById(`azzardo${i}`);
+      let sfidaButton = document.getElementById(`sfida${i}`);
+      azzardoButton.classList.add('transparent');
+      sfidaButton.classList.add('transparent');
+      azzardoButton.disabled = true;
+      sfidaButton.disabled = true;
     }
 
     azzardoActivated = false;
