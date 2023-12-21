@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campeggio Invernale 2023 - I SOLITI IGNOTI</title>
+  <style>
+    body {
+      background-image: url('sfondo_natalizio.jpg'); /* Sostituisci con il percorso dell'immagine desiderata */
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      position: relative;
+    }
+
+    #title-container {
+      position: relative;
+      background-color: #990000; /* Rosso scuro per lo sfondo */
+      padding: 20px;
+      border-radius: 10px;
+      color: #ffcc00; /* Giallo chiaro per il testo */
+      max-width: 600px; /* Nuova larghezza massima dello sfondo */
+      margin: 0 auto; /* Per centrare l'elemento orizzontalmente */
+    }
+
+    #title {
+      font-size: 36px; /* Aumentato la dimensione della scritta */
+      margin-bottom: 10px;
+    }
+
+    #subtitle {
+      font-size: 20px;
+    }
+
+    #total-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #000; /* Nero per il testo */
+      background-color: #fff; /* Bianco per lo sfondo */
+      display: flex;
+      align-items: center;
+      padding: 5px 10px; /* Aggiunto padding per uno stile migliore */
+      border-radius: 5px; /* Bordo arrotondato */
+    }
+
+    #total-icon {
+      margin-right: 5px;
+      font-size: 34px; /* Aumentato la dimensione dell'icona */
+    }
+
+    #total {
+      font-size: 34px; /* Aumentato la dimensione del testo Totale */
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px;
+      background-color: #ffffcc; /* Giallo chiaro */
+      color: #990000; /* Rosso scuro per il testo */
+      border: 2px solid #990000; /* Bordo rosso scuro */
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .transparent {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Aggiunta la classe completed per rendere trasparenti i pulsanti completati */
+    .button.completed {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Aggiungi gli elementi audio -->
+<audio id="audioCorrect" src="corretto.mp3"></audio>
+<audio id="audioWrong" src="sbagliato.mp3"></audio>
+
+<div id="total-container">
+  <span id="total">Totale: 0</span>
+  <span id="total-icon">€</span>
+</div>
+
+<div id="title-container">
+  <div id="title">I SOLITI IGNOTI</div>
+  <div id="subtitle">Campeggio invernale 2023 edition</div>
+</div>
+
+<div class="button-container">
+  <button class="button" onclick="handleButtonClick(1)" id="button1">Gioco 1</button>
+  <button class="button" onclick="handleButtonClick(2)" id="button2">Gioco 2</button>
+  <button class="button" onclick="handleButtonClick(3)" id="button3">Gioco 3</button>
+  <button class="button" onclick="handleButtonClick(4)" id="button4">Gioco 4</button>
+  <button class="button" onclick="handleButtonClick(5)" id="button5">Gioco 5</button>
+  <button class="button" onclick="handleButtonClick(6)" id="button6">Gioco 6</button>
+  <button class="button" onclick="handleButtonClick(7)" id="button7">Gioco 7</button>
+  <button class="button" onclick="handleButtonClick(8)" id="button8">Gioco 8</button>
+  <button class="button" onclick="handleButtonClick(9)" id="button9">Gioco 9</button>
+  <button class="button" onclick="handleButtonClick(10)" id="button10">Gioco 10</button>
+</div>
+
+<div class="button-container button-row">
+  <button class="button" onclick="handleAzzardoClick(1)" id="azzardo1">Azzardo 1</button>
+  <button class="button" onclick="handleAzzardoClick(2)" id="azzardo2">Azzardo 2</button>
+</div>
+
+<div class="button-container button-row">
+  <button class="button" onclick="handleSfidaClick(1)" id="sfida1">Sfida 1</button>
+  <button class="button" onclick="handleSfidaClick(2)" id="sfida2">Sfida 2</button>
+</div>
+
+<script>
+  let buttons = document.querySelectorAll('.button');
+  let correctCombination = [3, 6, 1, 7, 2, 4, 8, 10, 9, 5];
+  let currentRound = 1;
+  let totalAmount = 0;
+  let azzardoActivated = false; // Aggiunto il flag per l'Azzardo
+
+  function handleButtonClick(index) {
+    if (currentRound <= 10) {
+      if (azzardoActivated) {
+        if (index === correctCombination[currentRound - 1]) {
+          totalAmount += 100000; // Aggiorna il totale se Azzardo è attivo e il pulsante è corretto
+          buttons[index - 1].classList.add('completed'); // Aggiungi la classe completed
+          playAudio("audioCorrect"); // Riproduci l'audio corretto
+        } else {
+          totalAmount = 0; // Torna a 0 se Azzardo è attivo e il pulsante è sbagliato
+          playAudio("audioWrong"); // Riproduci l'audio errato
+        }
+        azzardoActivated = false; // Riporta il flag di Azzardo a false
+      } else {
+        if (index === correctCombination[currentRound - 1]) {
+          totalAmount += 50000; // Aggiorna il totale
+          playAudio("audioCorrect"); // Riproduci l'audio corretto
+          buttons[index - 1].classList.add('completed'); // Aggiungi la classe completed
+        } else {
+          playAudio("audioWrong"); // Riproduci l'audio errato
+        }
+      }
+
+      currentRound++;
+
+      if (currentRound > 10) {
+        endGame();
+      }
+
+      updateTotal(); // Aggiorna il totale
+    }
+  }
+
+  function handleAzzardoClick(azzardoIndex) {
+    azzardoActivated = true; // Attiva l'Azzardo
+    document.getElementById(`azzardo${azzardoIndex}`).classList.add('transparent');
+    document.getElementById(`azzardo${azzardoIndex}`).disabled = true;
+    // Non incrementare il round qui
+    if (currentRound > 10) {
+      endGame();
+    }
+  }
+
+  function handleSfidaClick(sfidaIndex) {
+    document.getElementById(`sfida${sfidaIndex}`).classList.add('transparent');
+    document.getElementById(`sfida${sfidaIndex}`).disabled = true;
+    // Non incrementare il round e non aggiornare il totale qui
+  }
+
+  function endGame() {
+    resetGame();
+  }
+
+  function resetGame() {
+    buttons.forEach(button => {
+      button.classList.remove('transparent');
+      button.classList.remove('completed'); // Rimuovi la classe completed
+      button.disabled = false;
+    });
+
+    for (let i = 1; i <= 2; i++) {
+      document.getElementById(`azzardo${i}`).classList.remove('transparent');
+      document.getElementById(`sfida${i}`).classList.remove('transparent');
+
+      document.getElementById(`azzardo${i}`).disabled = false;
+      document.getElementById(`sfida${i}`).disabled = false;
+    }
+
+    // Non reimpostare currentRound a 1 qui
+
+    azzardoActivated = false; // Disattiva l'Azzardo
+    updateTotal(); // Aggiorna il totale
+    showTotalDialog(totalAmount); // Aggiunta la finestra di dialogo con il totale
+  }
+
+  // Funzione per riprodurre l'audio
+  function playAudio(audioId) {
+    var audio = document.getElementById(audioId);
+    audio.currentTime = 0; // Riavvolgi l'audio al punto iniziale
+    audio.play();
+  }
+
+  // Funzione per aggiornare il totale
+  function updateTotal() {
+    document.getElementById('total').textContent = `Totale: ${totalAmount}`;
+  }
+
+  // Funzione per mostrare la finestra di dialogo con il totale
+  function showTotalDialog(total) {
+    alert(`Totale: ${total} €`);
+  }
+</script>
+
+</body>
+</html>
