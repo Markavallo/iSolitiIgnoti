@@ -6,7 +6,7 @@
   <title>Campeggio Invernale 2023 - I SOLITI IGNOTI</title>
   <style>
     body {
-      background-image: url('sfondo_natalizio.jpg'); /* Sostituisci con il percorso dell'immagine desiderata */
+      background-image: url('sfondo_natalizio.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       font-family: 'Arial', sans-serif;
@@ -16,42 +16,42 @@
 
     #title-container {
       position: relative;
-      background-color: #990000; /* Rosso scuro per lo sfondo */
+      background-color: #990000;
       padding: 20px;
       border-radius: 10px;
-      color: #ffcc00; /* Giallo chiaro per il testo */
-      max-width: 600px; /* Nuova larghezza massima dello sfondo */
-      margin: 0 auto; /* Per centrare l'elemento orizzontalmente */
+      color: #ffcc00;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     #title {
-      font-size: 36px; /* Aumentato la dimensione della scritta */
+      font-size: 24px;
       margin-bottom: 10px;
     }
 
     #subtitle {
-      font-size: 20px;
+      font-size: 16px;
     }
 
     #total-container {
       position: absolute;
       top: 10px;
       right: 10px;
-      color: #000; /* Nero per il testo */
-      background-color: #fff; /* Bianco per lo sfondo */
+      color: #000;
+      background-color: #fff;
       display: flex;
       align-items: center;
-      padding: 5px 10px; /* Aggiunto padding per uno stile migliore */
-      border-radius: 5px; /* Bordo arrotondato */
+      padding: 5px 10px;
+      border-radius: 5px;
     }
 
     #total-icon {
       margin-right: 5px;
-      font-size: 34px; /* Aumentato la dimensione dell'icona */
+      font-size: 20px;
     }
 
     #total {
-      font-size: 34px; /* Aumentato la dimensione del testo Totale */
+      font-size: 20px;
     }
 
     .button-container {
@@ -67,12 +67,12 @@
 
     .button {
       display: block;
-      width: 100%;
+      width: 80%; /* Ridotto il 100% a 80% per adattarsi meglio ai dispositivi mobili */
       padding: 10px;
       margin: 5px;
-      background-color: #ffffcc; /* Giallo chiaro */
-      color: #990000; /* Rosso scuro per il testo */
-      border: 2px solid #990000; /* Bordo rosso scuro */
+      background-color: #ffffcc;
+      color: #990000;
+      border: 2px solid #990000;
       font-weight: bold;
       cursor: pointer;
     }
@@ -82,7 +82,6 @@
       pointer-events: none;
     }
 
-    /* Aggiunta la classe completed per rendere trasparenti i pulsanti completati */
     .button.completed {
       opacity: 0.5;
       pointer-events: none;
@@ -91,7 +90,6 @@
 </head>
 <body>
 
-<!-- Aggiungi gli elementi audio -->
 <audio id="audioCorrect" src="corretto.mp3"></audio>
 <audio id="audioWrong" src="sbagliato.mp3"></audio>
 
@@ -133,27 +131,27 @@
   let correctCombination = [3, 6, 1, 7, 2, 4, 8, 10, 9, 5];
   let currentRound = 1;
   let totalAmount = 0;
-  let azzardoActivated = false; // Aggiunto il flag per l'Azzardo
+  let azzardoActivated = false;
 
   function handleButtonClick(index) {
     if (currentRound <= 10) {
       if (azzardoActivated) {
         if (index === correctCombination[currentRound - 1]) {
-          totalAmount += 100000; // Aggiorna il totale se Azzardo è attivo e il pulsante è corretto
-          buttons[index - 1].classList.add('completed'); // Aggiungi la classe completed
-          playAudio("audioCorrect"); // Riproduci l'audio corretto
+          totalAmount += 100000;
+          buttons[index - 1].classList.add('completed');
+          playAudio("audioCorrect");
         } else {
-          totalAmount = 0; // Torna a 0 se Azzardo è attivo e il pulsante è sbagliato
-          playAudio("audioWrong"); // Riproduci l'audio errato
+          totalAmount = 0;
+          playAudio("audioWrong");
         }
-        azzardoActivated = false; // Riporta il flag di Azzardo a false
+        azzardoActivated = false;
       } else {
         if (index === correctCombination[currentRound - 1]) {
-          totalAmount += 50000; // Aggiorna il totale
-          playAudio("audioCorrect"); // Riproduci l'audio corretto
-          buttons[index - 1].classList.add('completed'); // Aggiungi la classe completed
+          totalAmount += 50000;
+          playAudio("audioCorrect");
+          buttons[index - 1].classList.add('completed');
         } else {
-          playAudio("audioWrong"); // Riproduci l'audio errato
+          playAudio("audioWrong");
         }
       }
 
@@ -163,15 +161,15 @@
         endGame();
       }
 
-      updateTotal(); // Aggiorna il totale
+      updateTotal();
     }
   }
 
   function handleAzzardoClick(azzardoIndex) {
-    azzardoActivated = true; // Attiva l'Azzardo
+    azzardoActivated = true;
     document.getElementById(`azzardo${azzardoIndex}`).classList.add('transparent');
     document.getElementById(`azzardo${azzardoIndex}`).disabled = true;
-    // Non incrementare il round qui
+
     if (currentRound > 10) {
       endGame();
     }
@@ -180,7 +178,6 @@
   function handleSfidaClick(sfidaIndex) {
     document.getElementById(`sfida${sfidaIndex}`).classList.add('transparent');
     document.getElementById(`sfida${sfidaIndex}`).disabled = true;
-    // Non incrementare il round e non aggiornare il totale qui
   }
 
   function endGame() {
@@ -190,7 +187,7 @@
   function resetGame() {
     buttons.forEach(button => {
       button.classList.remove('transparent');
-      button.classList.remove('completed'); // Rimuovi la classe completed
+      button.classList.remove('completed');
       button.disabled = false;
     });
 
@@ -202,26 +199,21 @@
       document.getElementById(`sfida${i}`).disabled = false;
     }
 
-    // Non reimpostare currentRound a 1 qui
-
-    azzardoActivated = false; // Disattiva l'Azzardo
-    updateTotal(); // Aggiorna il totale
-    showTotalDialog(totalAmount); // Aggiunta la finestra di dialogo con il totale
+    azzardoActivated = false;
+    updateTotal();
+    showTotalDialog(totalAmount);
   }
 
-  // Funzione per riprodurre l'audio
   function playAudio(audioId) {
     var audio = document.getElementById(audioId);
-    audio.currentTime = 0; // Riavvolgi l'audio al punto iniziale
+    audio.currentTime = 0;
     audio.play();
   }
 
-  // Funzione per aggiornare il totale
   function updateTotal() {
     document.getElementById('total').textContent = `Totale: ${totalAmount}`;
   }
 
-  // Funzione per mostrare la finestra di dialogo con il totale
   function showTotalDialog(total) {
     alert(`Totale: ${total} €`);
   }
