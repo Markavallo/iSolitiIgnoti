@@ -17,20 +17,20 @@
     #title-container {
       position: relative;
       background-color: #990000;
-      padding: 20px;
+      padding: 10px;
       border-radius: 10px;
       color: #ffcc00;
-      max-width: 600px;
+      max-width: 90%;
       margin: 0 auto;
     }
 
     #title {
-      font-size: 24px;
-      margin-bottom: 10px;
+      font-size: 18px;
+      margin-bottom: 5px;
     }
 
     #subtitle {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     #total-container {
@@ -43,31 +43,34 @@
       align-items: center;
       padding: 5px 10px;
       border-radius: 5px;
+      font-size: 14px;
     }
 
     #total-icon {
       margin-right: 5px;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     #total {
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .button-container {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .button-row {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     .button {
       display: block;
-      width: 80%; /* Ridotto il 100% a 80% per adattarsi meglio ai dispositivi mobili */
+      width: 45%; /* Ridotto il 80% a 45% per adattarsi meglio ai dispositivi mobili */
       padding: 10px;
       margin: 5px;
       background-color: #ffffcc;
@@ -75,6 +78,7 @@
       border: 2px solid #990000;
       font-weight: bold;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .transparent {
@@ -169,10 +173,6 @@
     azzardoActivated = true;
     document.getElementById(`azzardo${azzardoIndex}`).classList.add('transparent');
     document.getElementById(`azzardo${azzardoIndex}`).disabled = true;
-
-    if (currentRound > 10) {
-      endGame();
-    }
   }
 
   function handleSfidaClick(sfidaIndex) {
