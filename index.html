@@ -180,13 +180,15 @@
 
   function handleAzzardoClick(azzardoIndex) {
     azzardoActivated = true;
-    document.getElementById(`azzardo${azzardoIndex}`).classList.add('transparent');
-    document.getElementById(`azzardo${azzardoIndex}`).disabled = true;
+    let azzardoButton = document.getElementById(`azzardo${azzardoIndex}`);
+    azzardoButton.classList.add('transparent');
+    azzardoButton.disabled = true;
   }
 
   function handleSfidaClick(sfidaIndex) {
-    document.getElementById(`sfida${sfidaIndex}`).classList.add('transparent');
-    document.getElementById(`sfida${sfidaIndex}`).disabled = true;
+    let sfidaButton = document.getElementById(`sfida${sfidaIndex}`);
+    sfidaButton.classList.add('transparent');
+    sfidaButton.disabled = true;
   }
 
   function endGame() {
