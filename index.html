@@ -72,22 +72,21 @@
       width: 90%;
       padding: 10px;
       margin: 5px;
-      background-color: #ffffcc;
-      color: #990000;
-      border: 2px solid #990000;
       font-weight: bold;
       cursor: pointer;
       font-size: 14px;
     }
 
-    .transparent {
+    .button.completed {
       opacity: 0.5;
       pointer-events: none;
     }
 
-    .button.completed {
-      opacity: 0.5;
-      pointer-events: none;
+    /* Stile per Azzardo 1, Azzardo 2, Sfida 1 e Sfida 2 */
+    #azzardo1, #azzardo2, #sfida1, #sfida2 {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: 2px solid #4CAF50;
     }
   </style>
 </head>
@@ -216,7 +215,7 @@
   }
 
   function showTotalDialog(total) {
-    alert(`Totale: ${total} €`);
+    alert(`Hai vinto ${total} € !!!!!`);
   }
 </script>
 
