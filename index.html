@@ -34,16 +34,16 @@
     }
 
     #total-container {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      position: relative;
       color: #000;
       background-color: #fff;
       display: flex;
       align-items: center;
+      justify-content: center;
       padding: 5px 10px;
       border-radius: 5px;
-      font-size: 14px;
+      font-size: 18px;
+      margin-top: 10px;
     }
 
     #total-icon {
@@ -70,7 +70,7 @@
 
     .button {
       display: block;
-      width: 45%; /* Ridotto il 80% a 45% per adattarsi meglio ai dispositivi mobili */
+      width: 45%;
       padding: 10px;
       margin: 5px;
       background-color: #ffffcc;
@@ -97,37 +97,39 @@
 <audio id="audioCorrect" src="corretto.mp3"></audio>
 <audio id="audioWrong" src="sbagliato.mp3"></audio>
 
-<div id="total-container">
-  <span id="total">Totale: 0</span>
-  <span id="total-icon">€</span>
-</div>
-
 <div id="title-container">
   <div id="title">I SOLITI IGNOTI</div>
   <div id="subtitle">Campeggio invernale 2023 edition</div>
 </div>
 
+<div id="total-container">
+  <span id="total">Totale: 0</span>
+  <span id="total-icon">€</span>
+</div>
+
 <div class="button-container">
-  <button class="button" onclick="handleButtonClick(1)" id="button1">Gioco 1</button>
-  <button class="button" onclick="handleButtonClick(2)" id="button2">Gioco 2</button>
-  <button class="button" onclick="handleButtonClick(3)" id="button3">Gioco 3</button>
-  <button class="button" onclick="handleButtonClick(4)" id="button4">Gioco 4</button>
-  <button class="button" onclick="handleButtonClick(5)" id="button5">Gioco 5</button>
-  <button class="button" onclick="handleButtonClick(6)" id="button6">Gioco 6</button>
-  <button class="button" onclick="handleButtonClick(7)" id="button7">Gioco 7</button>
-  <button class="button" onclick="handleButtonClick(8)" id="button8">Gioco 8</button>
-  <button class="button" onclick="handleButtonClick(9)" id="button9">Gioco 9</button>
-  <button class="button" onclick="handleButtonClick(10)" id="button10">Gioco 10</button>
-</div>
+  <div class="button-row">
+    <button class="button" onclick="handleButtonClick(1)" id="button1">Gioco 1</button>
+    <button class="button" onclick="handleButtonClick(2)" id="button2">Gioco 2</button>
+    <button class="button" onclick="handleButtonClick(3)" id="button3">Gioco 3</button>
+    <button class="button" onclick="handleButtonClick(4)" id="button4">Gioco 4</button>
+    <button class="button" onclick="handleButtonClick(5)" id="button5">Gioco 5</button>
+    <button class="button" onclick="handleButtonClick(6)" id="button6">Gioco 6</button>
+    <button class="button" onclick="handleButtonClick(7)" id="button7">Gioco 7</button>
+    <button class="button" onclick="handleButtonClick(8)" id="button8">Gioco 8</button>
+    <button class="button" onclick="handleButtonClick(9)" id="button9">Gioco 9</button>
+    <button class="button" onclick="handleButtonClick(10)" id="button10">Gioco 10</button>
+  </div>
 
-<div class="button-container button-row">
-  <button class="button" onclick="handleAzzardoClick(1)" id="azzardo1">Azzardo 1</button>
-  <button class="button" onclick="handleAzzardoClick(2)" id="azzardo2">Azzardo 2</button>
-</div>
+  <div class="button-row">
+    <button class="button" onclick="handleAzzardoClick(1)" id="azzardo1">Azzardo 1</button>
+    <button class="button" onclick="handleAzzardoClick(2)" id="azzardo2">Azzardo 2</button>
+  </div>
 
-<div class="button-container button-row">
-  <button class="button" onclick="handleSfidaClick(1)" id="sfida1">Sfida 1</button>
-  <button class="button" onclick="handleSfidaClick(2)" id="sfida2">Sfida 2</button>
+  <div class="button-row">
+    <button class="button" onclick="handleSfidaClick(1)" id="sfida1">Sfida 1</button>
+    <button class="button" onclick="handleSfidaClick(2)" id="sfida2">Sfida 2</button>
+  </div>
 </div>
 
 <script>
@@ -211,7 +213,7 @@
   }
 
   function updateTotal() {
-    document.getElementById('total').textContent = `Totale: ${totalAmount}`;
+    document.getElementById('total').textContent = `Totale: ${totalAmount} €`;
   }
 
   function showTotalDialog(total) {
