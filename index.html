@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +56,11 @@
       font-size: 18px;
     }
 
+    #round {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
     .button-container {
       text-align: center;
       margin-top: 10px;
@@ -91,145 +97,156 @@
     }
 
     /* Stile per Azzardo 1, Azzardo 2, Sfida 1 e Sfida 2 */
-    #azzardo1, #azzardo2, #sfida1, #sfida2 {
+    #azzardo1,
+    #azzardo2,
+    #sfida1,
+    #sfida2 {
       background-color: #4CAF50;
-      background-color: #0f4d07; /* Giallo chiaro */
-      color: #c4a912; /* Rosso scuro per il testo */
-      border: 2px solid #948715; /* Bordo rosso scuro */
+      background-color: #0f4d07;
+      /* Giallo chiaro */
+      color: #c4a912;
+      /* Rosso scuro per il testo */
+      border: 2px solid #948715;
+      /* Bordo rosso scuro */
     }
   </style>
 </head>
+
 <body>
 
-<audio id="audioCorrect" src="corretto.mp3"></audio>
-<audio id="audioWrong" src="sbagliato.mp3"></audio>
+  <audio id="audioCorrect" src="corretto.mp3"></audio>
+  <audio id="audioWrong" src="sbagliato.mp3"></audio>
 
-<div id="title-container">
-  <div id="title">I SOLITI IGNOTI</div>
-  <div id="subtitle">Campeggio invernale 2023 edition</div>
-</div>
-
-<div id="total-container">
-  <span id="total">Totale: 0</span>
-  <span id="total-icon">€</span>
-</div>
-
-<div class="button-container">
-  <div class="button-row">
-    <button class="button" onclick="handleButtonClick(1)" id="button1">Non ha mai mangiato una pizza</button>
-    <button class="button" onclick="handleButtonClick(2)" id="button2">Sa il cirillico</button>
-    <button class="button" onclick="handleButtonClick(3)" id="button3">Conosce il linguaggio dei segni</button>
-    <button class="button" onclick="handleButtonClick(4)" id="button4">Ha partecipato a Masterchef</button>
-    <button class="button" onclick="handleButtonClick(5)" id="button5">Beve solo birra</button>
-    <button class="button" onclick="handleButtonClick(6)" id="button6">Non sa respirare</button>
-    <button class="button" onclick="handleButtonClick(7)" id="button7">Ha 10 gatti tutti diversi</button>
-    <button class="button" onclick="handleButtonClick(8)" id="button8">Ha 10 lauree</button>
-    <button class="button" onclick="handleButtonClick(9)" id="button9">Non ha mai visto l'america</button>
-    <button class="button" onclick="handleButtonClick(10)" id="button10">Sa leccarsi la punta del naso</button>
+  <div id="title-container">
+    <div id="title">I SOLITI IGNOTI</div>
+    <div id="subtitle">Campeggio invernale 2023 edition</div>
   </div>
 
-  <div class="button-row">
-    <button class="button" onclick="handleAzzardoClick(1)" id="azzardo1">Azzardo 1</button>
-    <button class="button" onclick="handleAzzardoClick(2)" id="azzardo2">Azzardo 2</button>
+  <div id="total-container">
+    <span id="total">Totale: 0</span>
+    <span id="total-icon">€</span>
+    <span id="round">Round: 1</span>
   </div>
 
-  <div class="button-row">
-    <button class="button" onclick="handleSfidaClick(1)" id="sfida1">Sfida 1</button>
-    <button class="button" onclick="handleSfidaClick(2)" id="sfida2">Sfida 2</button>
+  <div class="button-container">
+    <div class="button-row">
+      <button class="button" onclick="handleButtonClick(1)" id="button1">Non ha mai mangiato una pizza</button>
+      <button class="button" onclick="handleButtonClick(2)" id="button2">Sa il cirillico</button>
+      <button class="button" onclick="handleButtonClick(3)" id="button3">Conosce il linguaggio dei segni</button>
+      <button class="button" onclick="handleButtonClick(4)" id="button4">Ha partecipato a Masterchef</button>
+      <button class="button" onclick="handleButtonClick(5)" id="button5">Beve solo birra</button>
+      <button class="button" onclick="handleButtonClick(6)" id="button6">Non sa respirare</button>
+      <button class="button" onclick="handleButtonClick(7)" id="button7">Ha 10 gatti tutti diversi</button>
+      <button class="button" onclick="handleButtonClick(8)" id="button8">Ha 10 lauree</button>
+      <button class="button" onclick="handleButtonClick(9)" id="button9">Non ha mai visto l'america</button>
+      <button class="button" onclick="handleButtonClick(10)" id="button10">Sa leccarsi la punta del naso</button>
+    </div>
+
+    <div class="button-row">
+      <button class="button" onclick="handleAzzardoClick(1)" id="azzardo1">Azzardo 1</button>
+      <button class="button" onclick="handleAzzardoClick(2)" id="azzardo2">Azzardo 2</button>
+    </div>
+
+    <div class="button-row">
+      <button class="button" onclick="handleSfidaClick(1)" id="sfida1">Sfida 1</button>
+      <button class="button" onclick="handleSfidaClick(2)" id="sfida2">Sfida 2</button>
+    </div>
   </div>
-</div>
 
-<script>
-  let buttons = document.querySelectorAll('.button');
-  let correctCombination = [3, 6, 1, 7, 2, 4, 8, 10, 9, 5];
-  let currentRound = 1;
-  let totalAmount = 0;
-  let azzardoActivated = false;
+  <script>
+    let buttons = document.querySelectorAll('.button');
+    let correctCombination = [3, 6, 1, 7, 2, 4, 8, 10, 9, 5];
+    let currentRound = 1;
+    let totalAmount = 0;
+    let azzardoActivated = false;
 
-  function handleButtonClick(index) {
-    if (currentRound <= 10) {
-      if (azzardoActivated) {
-        if (index === correctCombination[currentRound - 1]) {
-          totalAmount += 100000;
-          buttons[index - 1].classList.add('completed');
-          playAudio("audioCorrect");
+    function handleButtonClick(index) {
+      if (currentRound <= 10) {
+        if (azzardoActivated) {
+          if (index === correctCombination[currentRound - 1]) {
+            totalAmount += 100000;
+            buttons[index - 1].classList.add('completed');
+            playAudio("audioCorrect");
+          } else {
+            totalAmount = 0;
+            playAudio("audioWrong");
+          }
+          azzardoActivated = false;
         } else {
-          totalAmount = 0;
-          playAudio("audioWrong");
+          if (index === correctCombination[currentRound - 1]) {
+            totalAmount += 50000;
+            playAudio("audioCorrect");
+            buttons[index - 1].classList.add('completed');
+          } else {
+            playAudio("audioWrong");
+          }
         }
-        azzardoActivated = false;
-      } else {
-        if (index === correctCombination[currentRound - 1]) {
-          totalAmount += 50000;
-          playAudio("audioCorrect");
-          buttons[index - 1].classList.add('completed');
-        } else {
-          playAudio("audioWrong");
+
+        currentRound++;
+
+        if (currentRound > 10) {
+          endGame();
         }
+
+        updateTotal();
       }
-
-      currentRound++;
-
-      if (currentRound > 10) {
-        endGame();
-      }
-
-      updateTotal();
     }
-  }
 
-  function handleAzzardoClick(azzardoIndex) {
-    azzardoActivated = true;
-    let azzardoButton = document.getElementById(`azzardo${azzardoIndex}`);
-    azzardoButton.classList.add('transparent');
-    azzardoButton.disabled = true;
-  }
-
-  function handleSfidaClick(sfidaIndex) {
-    let sfidaButton = document.getElementById(`sfida${sfidaIndex}`);
-    sfidaButton.classList.add('transparent');
-    sfidaButton.disabled = true;
-  }
-
-  function endGame() {
-    resetGame();
-  }
-
-  function resetGame() {
-    buttons.forEach(button => {
-      button.classList.remove('transparent');
-      button.classList.remove('completed');
-      button.disabled = false;
-    });
-
-    for (let i = 1; i <= 2; i++) {
-      let azzardoButton = document.getElementById(`azzardo${i}`);
-      let sfidaButton = document.getElementById(`sfida${i}`);
+    function handleAzzardoClick(azzardoIndex) {
+      azzardoActivated = true;
+      let azzardoButton = document.getElementById(`azzardo${azzardoIndex}`);
       azzardoButton.classList.add('transparent');
-      sfidaButton.classList.add('transparent');
       azzardoButton.disabled = true;
+    }
+
+    function handleSfidaClick(sfidaIndex) {
+      let sfidaButton = document.getElementById(`sfida${sfidaIndex}`);
+      sfidaButton.classList.add('transparent');
       sfidaButton.disabled = true;
     }
 
-    azzardoActivated = false;
-    updateTotal();
-    showTotalDialog(totalAmount);
-  }
+    function endGame() {
+      resetGame();
+    }
 
-  function playAudio(audioId) {
-    var audio = document.getElementById(audioId);
-    audio.currentTime = 0;
-    audio.play();
-  }
+    function resetGame() {
+      buttons.forEach(button => {
+        button.classList.remove('transparent');
+        button.classList.remove('completed');
+        button.disabled = false;
+      });
 
-  function updateTotal() {
-    document.getElementById('total').textContent = `Totale: ${totalAmount}`;
-  }
+      for (let i = 1; i <= 2; i++) {
+        let azzardoButton = document.getElementById(`azzardo${i}`);
+        let sfidaButton = document.getElementById(`sfida${i}`);
+        azzardoButton.classList.add('transparent');
+        sfidaButton.classList.add('transparent');
+        azzardoButton.disabled = true;
+        sfidaButton.disabled = true;
+      }
 
-  function showTotalDialog(total) {
-    alert(`Hai vinto ${total} € !!!!!`);
-  }
-</script>
+      azzardoActivated = false;
+      currentRound = 1;
+      updateTotal();
+      showTotalDialog(totalAmount);
+    }
+
+    function playAudio(audioId) {
+      var audio = document.getElementById(audioId);
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function updateTotal() {
+      document.getElementById('total').textContent = `Totale: ${totalAmount}`;
+      document.getElementById('round').textContent = `Round: ${currentRound}`;
+    }
+
+    function showTotalDialog(total) {
+      alert(`Hai vinto ${total} € !!!!!`);
+    }
+  </script>
 
 </body>
+
 </html>
